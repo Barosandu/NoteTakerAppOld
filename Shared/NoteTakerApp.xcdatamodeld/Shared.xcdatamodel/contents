@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="MarcajeData" representedClassName="MarcajeData" syncable="YES" codeGenerationType="class">
+        <attribute name="nume" optional="YES" attributeType="String"/>
+        <attribute name="savedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="scale" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="x" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="ownedByNote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NoteData" inverseName="ownedMarcaje" inverseEntity="NoteData"/>
+    </entity>
+    <entity name="NoteData" representedClassName="NoteData" syncable="YES" codeGenerationType="class">
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="noteId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="savedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="ownedBySection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NoteSection" inverseName="sectionOwnedNotes" inverseEntity="NoteSection"/>
+        <relationship name="ownedMarcaje" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MarcajeData" inverseName="ownedByNote" inverseEntity="MarcajeData"/>
+        <relationship name="ownedStrokes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="StrokeData" inverseName="ownedByNote" inverseEntity="StrokeData"/>
+    </entity>
+    <entity name="NoteSection" representedClassName="NoteSection" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="sectionOwnedNotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="NoteData" inverseName="ownedBySection" inverseEntity="NoteData"/>
+    </entity>
+    <entity name="StrokeData" representedClassName="StrokeData" syncable="YES" codeGenerationType="class">
+        <attribute name="boldArray" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <attribute name="italicArray" optional="YES" attributeType="String"/>
+        <attribute name="pointSet" optional="YES" attributeType="String"/>
+        <attribute name="skipIndexes" optional="YES" attributeType="String"/>
+        <attribute name="strokeId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="textValue" optional="YES" attributeType="String"/>
+        <attribute name="typeOfStroke" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="width" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="ownedByNote" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NoteData" inverseName="ownedStrokes" inverseEntity="NoteData"/>
+    </entity>
+</model>
