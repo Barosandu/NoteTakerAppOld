@@ -198,6 +198,7 @@ class DrawViewFBF: NSView {
         
         NotificationCenter.default.addObserver(forName: .didChangeNote, object: nil, queue: nil) { not in
             self.updateSelf()
+			self.imageDictionary = [:]
         }
         
         
@@ -263,6 +264,8 @@ class DrawViewFBF: NSView {
         self.drawLinesView.trueScale = self.trueScale
         self.drawLinesView.trueOffset = self.trueOffset
         self.drawLinesView.dragOffset = self.dragOffset
+		self.drawLinesView.setNeedsDisplay(self.drawLinesView.bounds)
+		
         
     }
     var movingShit = false
@@ -698,7 +701,7 @@ class DrawRestOfLines: NSView {
         }
         
         context.saveGState()
-        if self.sEnv.wrappedValue.showGrid {
+        if false {
             let geo = CGSize(width: self.bounds.width, height: self.bounds.height)
             let facInt = Double(Int(log2(1 / self.trueScale)))
             let scalePow: CGFloat = .init(pow(2, facInt))
